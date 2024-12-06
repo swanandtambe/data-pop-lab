@@ -61,6 +61,8 @@ class CustomCSVJob(Job):
                         self.logger.info(f'{location_name} DC location created')
                 else:
                     self.logger.warning(f'Error with location entry on row {row_num}')
+            except:
+                self.logger.info(f'Error while creating DC or BR location')
 
 
 register_jobs(CustomCSVJob)
