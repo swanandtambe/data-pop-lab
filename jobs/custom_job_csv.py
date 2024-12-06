@@ -62,5 +62,5 @@ class CustomCSVJob(Job):
                 else:
                     self.logger.warning(f'Error with location entry on row {row_num}')
 
-name = "Custom Job for location import"
+
 register_jobs(CustomCSVJob)
