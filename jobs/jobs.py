@@ -51,11 +51,11 @@ class CustomCSVJob(Job):
                 self.logger.info('Error while creating City location object')
             try:
                 location_dc_br = location_name.split("-")[-1]
-                if location_dc_br == 'DC'
+                if location_dc_br == 'DC':
                     location_obj, created = Location.objects.get_or_create(name=location_name,location_type='Data Center', parent=location_city_obj, status='Active')
                     if created:
                         self.logger.info(f'{location_name} DC location created')
-                elif location_dc_br == 'BR'
+                elif location_dc_br == 'BR':
                     location_obj, created = Location.objects.get_or_create(name=location_name,location_type='Branch', parent=location_city_obj, status='Active')
                     if created:
                         self.logger.info(f'{location_name} DC location created')
