@@ -3,6 +3,7 @@ from logging import DEBUG, INFO
 
 from nautobot.dcim.models import Device, Location
 from nautobot.apps.jobs import Job, register_jobs
+from nautobot.extras.jobs import FileVar
 from django.db import transaction
 
 class CustomCSVJob(Job):
