@@ -36,14 +36,14 @@ class CustomCSVJob(Job):
             location_city = data.get("city")
             location_state = data.get("state")
             try:
-                location_state_obj, created = Location.objects.get_or_create(name=location_state,location_type='State')
+                location_state_obj, created = Location.objects.get_or_create(name=location_state,location_type='State', status='Active')
                 if created:
                     self.logger.info(f'{location_state} State location created')
                 location_state_obj.validated_save()
             except:
                 self.logger.info(f'Error while creating State location object row {row_num}')
             try:
-                location_city_obj, created = Location.objects.get_or_create(name=location_city,location_type='City', parent=location_state_obj)
+                location_city_obj, created = Location.objects.get_or_create(name=location_city,location_type='City', parent=location_state_obj, status='Active')
                 if created:
                     self.logger.info(f'{location_city} State location created')
                 location_city_obj.validated_save()
@@ -52,11 +52,11 @@ class CustomCSVJob(Job):
             try:
                 location_dc_br = location_name.split("-")[-1]
                 if location_dc_br == 'DC'
-                    location_obj, created = Location.objects.get_or_create(name=location_name,location_type='Data Center', parent=location_city_obj)
+                    location_obj, created = Location.objects.get_or_create(name=location_name,location_type='Data Center', parent=location_city_obj, status='Active')
                     if created:
                         self.logger.info(f'{location_name} DC location created')
                 elif location_dc_br == 'BR'
-                    location_obj, created = Location.objects.get_or_create(name=location_name,location_type='Branch', parent=location_city_obj)
+                    location_obj, created = Location.objects.get_or_create(name=location_name,location_type='Branch', parent=location_city_obj, status='Active')
                     if created:
                         self.logger.info(f'{location_name} DC location created')
                 else:
