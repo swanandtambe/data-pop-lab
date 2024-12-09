@@ -68,5 +68,4 @@ class CustomCSVJob(Job):
                 self.logger.info(f'Error while creating DC or BR location')
 
 
-name = "General Job"
 register_jobs(CustomCSVJob)
