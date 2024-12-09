@@ -58,10 +58,12 @@ class CustomCSVJob(Job):
                     location_obj, created = Location.objects.get_or_create(name=location_name,location_type='Data Center', parent=location_city_obj, status='Active')
                     if created:
                         self.logger.info(f'{location_name} DC location created')
+                    location_obj.validated_save()
                 elif location_dc_br == 'BR':
                     location_obj, created = Location.objects.get_or_create(name=location_name,location_type='Branch', parent=location_city_obj, status='Active')
                     if created:
                         self.logger.info(f'{location_name} DC location created')
+                    location_obj.validated_save()
                 else:
                     self.logger.warning(f'Error with location entry on row {row_num}')
             except:
