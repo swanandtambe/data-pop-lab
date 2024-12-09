@@ -2,10 +2,10 @@ import csv
 import io
 from logging import DEBUG, INFO
 
-from nautobot.dcim.models import Device, Location
-from nautobot.apps.jobs import Job, register_jobs
-from nautobot.extras.jobs import FileVar
-from django.db import transaction
+from nautobot.dcim.models import Device, Location # type: ignore
+from nautobot.apps.jobs import Job, register_jobs # type: ignore
+from nautobot.extras.jobs import FileVar # type: ignore
+from django.db import transaction # type: ignore
 
 class CustomCSVJob(Job):
     class Meta:
@@ -68,6 +68,5 @@ class CustomCSVJob(Job):
                     self.logger.warning(f'Error with location entry on row {row_num}')
             except:
                 self.logger.info(f'Error while creating DC or BR location')
-
 
 register_jobs(CustomCSVJob)
