@@ -1,4 +1,5 @@
 import csv
+import io
 from logging import DEBUG, INFO
 
 from nautobot.dcim.models import Device, Location
@@ -30,9 +31,10 @@ class CustomCSVJob(Job):
         if "locations" in file_name:
             self.logger.info("Matched file to locations: using 'name' as key")
             # Read CSV File and Output Overview of Rows.
-            csv_data = self.read_audit_csv(csv_file, "name")
+            csv_file_content = csv_file.read().decode("utf-8")
+            csv_reader = csv.DictReader(io.StringIO(csv_file_content))
 
-        for row_num, data in enumerate(csv_data, start=2):
+        for row_num, data in enumerate(csv_reader, start=2):
             location_name = data.get("name")
             location_city = data.get("city")
             location_state = data.get("state")
