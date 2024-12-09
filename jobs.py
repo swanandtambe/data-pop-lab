@@ -43,14 +43,14 @@ class CustomCSVJob(Job):
                 if created:
                     self.logger.info(f'{location_state} State location created')
                 location_state_obj.validated_save()
-            except Error as e:
+            except Exception as e:
                 self.logger.info(f'Error while creating State location object row {row_num} {e}')
             try:
                 location_city_obj, created = Location.objects.get_or_create(name=location_city,location_type='City', parent=location_state_obj, status='Active')
                 if created:
                     self.logger.info(f'{location_city} State location created')
                 location_city_obj.validated_save()
-            except Error as e:
+            except Exception as e:
                 self.logger.info(f'Error while creating City location object {e}')
             try:
                 location_dc_br = location_name.split("-")[-1]
@@ -66,7 +66,7 @@ class CustomCSVJob(Job):
                     location_obj.validated_save()
                 else:
                     self.logger.warning(f'Error with location entry on row {row_num}')
-            except Error as e:
+            except Exception as e:
                 self.logger.info(f'Error while creating DC or BR location {e}')
 
 register_jobs(CustomCSVJob)
