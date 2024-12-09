@@ -39,14 +39,14 @@ class CustomCSVJob(Job):
             location_city = data.get("city")
             location_state = data.get("state")
             try:
-                location_state_obj, created = Location.objects.get_or_create(name=location_state,location_type='State', status='Active')
+                location_state_obj, created = Location.objects.get_or_create(name=location_state,location_type='a40ca39f-2291-4fda-a6a3-6cbe6f8d8eaa', status='Active')
                 if created:
                     self.logger.info(f'{location_state} State location created')
                 location_state_obj.validated_save()
             except Exception as e:
                 self.logger.info(f'Error while creating State location object row {row_num} {e}')
             try:
-                location_city_obj, created = Location.objects.get_or_create(name=location_city,location_type='City', parent=location_state_obj, status='Active')
+                location_city_obj, created = Location.objects.get_or_create(name=location_city,location_type='178bbbc2-a844-4b45-b89c-bf200023db64', parent=location_state_obj, status='Active')
                 if created:
                     self.logger.info(f'{location_city} State location created')
                 location_city_obj.validated_save()
@@ -55,12 +55,12 @@ class CustomCSVJob(Job):
             try:
                 location_dc_br = location_name.split("-")[-1]
                 if location_dc_br == 'DC':
-                    location_obj, created = Location.objects.get_or_create(name=location_name,location_type='Data Center', parent=location_city_obj, status='Active')
+                    location_obj, created = Location.objects.get_or_create(name=location_name,location_type='722dff5f-041d-4fbd-9e50-fb80709856e2', parent=location_city_obj, status='Active')
                     if created:
                         self.logger.info(f'{location_name} DC location created')
                     location_obj.validated_save()
                 elif location_dc_br == 'BR':
-                    location_obj, created = Location.objects.get_or_create(name=location_name,location_type='Branch', parent=location_city_obj, status='Active')
+                    location_obj, created = Location.objects.get_or_create(name=location_name,location_type='1d1a7bfb-e3e4-45aa-b6e6-eaddb320cf48', parent=location_city_obj, status='Active')
                     if created:
                         self.logger.info(f'{location_name} DC location created')
                     location_obj.validated_save()
